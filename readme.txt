@@ -4,10 +4,10 @@ Tags: custom-admin
 Donate link: https://www.close.marketing/go/donate/
 Requires at least: 4.0
 Tested up to: 5.6
-Stable tag: 1.7
-Version: 1.7
+Stable tag: 0.1
+Version: 0.1
 
-Custom admin enhacements for Closemarketing Webs in WordPress.
+Integrate Clientify with WordPress.
 
 == Description ==
 Makes some changes in WordPress admin for better customization in Closemarketing Webs:
