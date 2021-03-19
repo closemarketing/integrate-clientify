@@ -4,8 +4,8 @@ Tags: custom-admin
 Donate link: https://www.close.marketing/go/donate/
 Requires at least: 4.0
 Tested up to: 5.7
-Stable tag: 0.1
-Version: 0.1
+Stable tag: 0.2
+Version: 0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,8 +15,7 @@ Integrate Clientify with WordPress.
 Integrates Clienfity with WordPress:
 - Web Analytics
 - Chatbot
-
-
+- Spider Webforms
 
 Others Plugins:
 
@@ -38,6 +37,9 @@ WordPress installation and then activate the Plugin from Plugins page.
 [Official Repository Github](https://github.com/closemarketing/integration-clientify)
 
 == Changelog ==
+
+= 0.2 =
+*   Integrate Spider Webforms.
 
 = 0.1 =
 *   First released.
