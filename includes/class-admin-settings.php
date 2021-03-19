@@ -148,9 +148,11 @@ class INTCLI_Admin_Settings {
 		if ( isset( $input['spider'] ) ) {
 			$index = 0;
 			foreach ( $input['spider'] as $spider ) {
-				$sanitary_values['spider'][ $index ]['page'] = sanitize_text_field( $spider['page'] );
-				$sanitary_values['spider'][ $index ]['id']   = sanitize_text_field( $spider['id'] );
-				$index++;
+				if ( $spider['page'] ) {
+					$sanitary_values['spider'][ $index ]['page'] = sanitize_text_field( $spider['page'] );
+					$sanitary_values['spider'][ $index ]['id']   = sanitize_text_field( $spider['id'] );
+					$index++;
+				}
 			}
 		}
 
@@ -277,8 +279,7 @@ class INTCLI_Admin_Settings {
 	public function spider_callback() {
 		$options = get_option( 'integration_clientify' );
 		$posts_options = $this->get_pages_option();
-
-		for ( $idx = 0, $size = count( $options['spider'] ); $idx < $size; ++$idx ) {
+		for ( $idx = 0, $size = count( $options['spider'] ); $idx <= $size; ++$idx ) {
 			?>
 			<div class="repeating" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
 				<p><strong><?php esc_html_e( 'Page to load' );?></strong></p>
