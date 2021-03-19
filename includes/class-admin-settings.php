@@ -108,6 +108,21 @@ class INTCLI_Admin_Settings {
 			'intclientify-admin',
 			'intcli_setting_section'
 		);
+
+		add_settings_section(
+			'intcli_spider_section',
+			__( 'Spider Settings', 'integration-clientify' ),
+			array( $this, 'spider_section' ),
+			'intclientify-admin'
+		);
+
+		add_settings_field(
+			'spider',
+			__( 'Clientify ChatBot ID', 'integration-clientify' ),
+			array( $this, 'spider_callback' ),
+			'intclientify-admin',
+			'intcli_spider_section'
+		);
 	}
 
 	/**
@@ -176,6 +191,74 @@ class INTCLI_Admin_Settings {
 			?>
 			<option value="no" <?php echo esc_html( $selected ); ?>><?php esc_html_e( 'No', 'integration_clientify' ); ?></option>
 		</select>
+		<?php
+	}
+
+	/**
+	 * Info for holded automate section.
+	 *
+	 * @return void
+	 */
+	public function spider_section() {
+		esc_html_e( 'Put the settings for Clientify in order to integrate with WordPress', 'integration_clientify' );
+	}
+
+	/**
+	 * Spider URL Callback
+	 *
+	 * @return void
+	 */
+	public function spider_callback() {
+		$options = get_option( 'integration_clientify' );
+		?>
+		<div class="repeating" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+			<p><strong><?php esc_html_e( 'Page to load' ); ?></strong></p>
+			<select name='integration_clientify[spider][1][page]'>
+				<option value=''></option>
+				<option value='text' <?php selected('one', $options['spider'][1]['page']); ?>>Short Text Field</option>
+				<option value='textarea' <?php selected('two', $options['spider'][1]['page']); ?>>Multi-line Text Area</option>
+			</select>
+			<p><strong><?php esc_html_e( 'ID Spider' ); ?></strong></p>
+			<input type="text" size="30" name="integration_clientify[spider][1][id]" value="<?php echo $options['spider'][1]['id']; ?>" />
+			<?php /*
+			<p><strong><?php _e('Display in Business Directory?'); ?></strong></p>	
+				<label><input name="integration_clientify[spider][1][display_dir]" type="radio" value="yes" <?php checked('yes', $options['spider'][1]['display_dir']); ?> /> Yes</label><br />
+				<label><input name="integration_clientify[spider][1][display_dir]" type="radio" value="no" <?php checked('no', $options['spider'][1]['display_dir']); ?> /> No</label><br />
+		
+			<p><strong><?php _e('Display in Single Business View?'); ?></strong></p>
+				<label><input name="integration_clientify[spider][1][display_single]" type="radio" value="yes" <?php checked('yes', $options['spider'][1]['display_single']); ?> /> Yes</label><br />
+				<label><input name="integration_clientify[spider][1][display_single]" type="radio" value="no" <?php checked('no', $options['spider'][1]['display_single']); ?> /> No</label><br />*/ ?>
+			<p><a href="#" class="repeat">Add Another</a></p>
+		</div>
+		<script type="text/javascript">
+		// Prepare new attributes for the repeating section
+		var attrs = ['for', 'id', 'name'];
+		function resetAttributeNames(section) { 
+		var tags = section.find('input, label'), idx = section.index();
+		tags.each(function() {
+			var $this = jQuery(this);
+			jQuery.each(attrs, function(i, attr) {
+			var attr_val = $this.attr(attr);
+			if (attr_val) {
+				$this.attr(attr, attr_val.replace(/\[spider\]\[\d+\]\[/, '\[spider\]\['+(idx + 1)+'\]\['))
+			}
+			})
+		})
+		}
+		
+		// Clone the previous section, and remove all of the values                  
+		jQuery('.repeat').click(function(e){
+			e.preventDefault();
+			var lastRepeatingGroup = jQuery('.repeating').last();
+			var cloned = lastRepeatingGroup.clone(true)  
+			cloned.insertAfter(lastRepeatingGroup);
+			cloned.find("input").val("");
+			cloned.find("select").val("");
+			cloned.find("input:radio").attr("checked", false);
+			resetAttributeNames(cloned)
+		});
+		
+		</script>
 		<?php
 	}
 }
