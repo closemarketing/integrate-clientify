@@ -239,7 +239,7 @@ class INTCLI_Admin_Settings {
 			);
 			$posts_array = get_posts( $args_query );
 			foreach ( $posts_array as $post_single ) {
-				$posts_options[ $post_type->name . '|' . $post_single->ID ] = $post_single->post_title;
+				$posts_options[ 'post_type' . '|' . $post_type->name . '|' . $post_single->ID ] = $post_single->post_title;
 			}
 		}
 
@@ -263,7 +263,7 @@ class INTCLI_Admin_Settings {
 			);
 			$terms_array = get_terms( $args_query );
 			foreach ( $terms_array as $term ) {
-				$posts_options[ $taxonomy->name . '|' . $term->term_id ] = $term->name;
+				$posts_options[ 'taxonomy' . '|' . $taxonomy->name . '|' . $term->term_id ] = $term->name;
 			}
 		}
 		return $posts_options;
