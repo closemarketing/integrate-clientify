@@ -19,7 +19,7 @@ class INTCLI_Public_Scripts {
 	 */
 	public function __construct() {
 		add_action( 'wp_footer', array( $this, 'footer_scripts_webanalytics' ) );
-		add_action( 'wp_footer', array( $this, 'footer_scripts_chatbots' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'footer_scripts_chatbots' ) );
 		add_action( 'wp_footer', array( $this, 'footer_scripts_webforms' ) );
 	}
 
@@ -65,8 +65,12 @@ class INTCLI_Public_Scripts {
 		$chatbot      = isset( $int_settings['chatbot'] ) ? $int_settings['chatbot'] : '';
 
 		if ( $chatbot ) {
-			// Chatbots.
-			echo '<script type="text/javascript" src="https://clientify.net/web-marketing/chatbots/script/' . esc_html( $chatbot ) . '.js"></script>';
+			wp_enqueue_script(
+				'clientify-chatbot',
+				'https://clientify.net/web-marketing/chatbots/script/' . esc_html( $chatbot ) . '.js',
+				array(),
+				INTCLI_VERSION
+			);
 		}
 	}
 

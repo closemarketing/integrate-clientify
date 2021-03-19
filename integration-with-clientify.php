@@ -23,6 +23,8 @@
 
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 
+define( 'INTCLI_VERSION', '0.2' );
+
 add_action( 'plugins_loaded', 'intcli_plugin_init' );
 /**
  * Load localization files
