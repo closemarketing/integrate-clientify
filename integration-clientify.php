@@ -35,33 +35,4 @@ function intcli_plugin_init() {
 
 // Include files.
 require_once plugin_dir_path( __FILE__ ) . '/includes/class-admin-settings.php';
-
-add_action( 'wp_footer', 'intcli_footer_scripts' );
-/**
- * Web Analytics script
- *
- * @return void
- */
-function intcli_footer_scripts() {
-	// Web Analytics.
-	echo '<!--Clientify Tracking Begins-->
-	<script type="text/javascript">
-	if (typeof trackerCode ==="undefined"){
-	    (function (d, w, u, o) {
-		  w[o] = w[o] || function () {
-			(w[o].q = w[o].q || []).push(arguments)
-		  };
-		  a = d.createElement("script"),
-			m = d.getElementsByTagName("script")[0];
-		  a.async = 1; a.src = u;
-		  m.parentNode.insertBefore(a, m)
-	    })(document, window, "https://analytics.clientify.net/tracker.js", "ana");
-	    ana("setTrackerUrl", "https://analytics.clientify.net");
-	    ana("setTrackingCode", "CF-9313-9313-LMXY3");
-	    ana("trackPageview");
-	}</script>
-	<!--Clientify Tracking Ends-->';
-
-	// Chatbots.
-	echo '<script type="text/javascript" src="https://clientify.net/web-marketing/chatbots/script/42538.js"></script>';
-}
+require_once plugin_dir_path( __FILE__ ) . '/includes/class-public-scripts.php';

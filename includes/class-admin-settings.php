@@ -19,7 +19,7 @@ class INTCLI_Admin_Settings {
 	 *
 	 * @var array
 	 */
-	private $meetup_settings;
+	private $intclientify_settings;
 	/**
 	 * Construct of class
 	 */
@@ -36,8 +36,8 @@ class INTCLI_Admin_Settings {
 	public function add_plugin_page() {
 		add_submenu_page(
 			'options-general.php',
-			__( 'Clientify', 'integration-clientify' ),
-			__( 'Clientify', 'integration-clientify' ),
+			__( 'Clientify Integration', 'integration-clientify' ),
+			__( 'Clientify Integration', 'integration-clientify' ),
 			'manage_options',
 			'intclientify_admin',
 			array( $this, 'create_admin_page' ),
@@ -50,11 +50,10 @@ class INTCLI_Admin_Settings {
 	 * @return void
 	 */
 	public function create_admin_page() {
-		$this->meetup_settings = get_option( 'int_clientify' );
-		$results = $this->get_meetup_options( $this->meetup_settings['meetup_url'] );
+		$this->intclientify_settings = get_option( 'integration_clientify' );
 		?>
 		<div class="wrap">
-			<h2><?php esc_html_e( 'Meetings Settings', 'integration-clientify' ); ?>
+			<h2><?php esc_html_e( 'Clientify Integration Settings', 'integration-clientify' ); ?>
 			</h2>
 			<p></p>
 			<?php
@@ -63,7 +62,7 @@ class INTCLI_Admin_Settings {
 			<form method="post" action="options.php">
 				<?php
 				settings_fields( 'intclientify_settings' );
-				do_settings_sections( 'meetings-admin' );
+				do_settings_sections( 'intclientify-admin' );
 				submit_button( __( 'Save settings', 'integration-clientify' ), 'primary', 'submit_settings' );
 				?>
 			</form>
@@ -77,20 +76,36 @@ class INTCLI_Admin_Settings {
 	 * @return void
 	 */
 	public function page_init() {
-		register_setting( 'intclientify_settings', 'meetings', array( $this, 'sanitize_fields' ) );
+		register_setting( 'intclientify_settings', 'integration_clientify', array( $this, 'sanitize_fields' ) );
 
 		add_settings_section(
 			'intcli_setting_section',
 			__( 'Settings', 'integration-clientify' ),
 			array( $this, 'intcli_section_info' ),
-			'meetings-admin'
+			'intclientify-admin'
 		);
 
 		add_settings_field(
-			'meetup_url',
-			__( 'Meetup URL', 'integration-clientify' ),
-			array( $this, 'meetup_url_callback' ),
-			'meetings-admin',
+			'active',
+			__( 'Active Clientify Web Analytics', 'integration-clientify' ),
+			array( $this, 'active_callback' ),
+			'intclientify-admin',
+			'intcli_setting_section'
+		);
+
+		add_settings_field(
+			'webanalytics',
+			__( 'Clientify Web Analytics Code', 'integration-clientify' ),
+			array( $this, 'webanalytics_callback' ),
+			'intclientify-admin',
+			'intcli_setting_section'
+		);
+
+		add_settings_field(
+			'chatbot',
+			__( 'Clientify ChatBot ID', 'integration-clientify' ),
+			array( $this, 'chatbot_callback' ),
+			'intclientify-admin',
 			'intcli_setting_section'
 		);
 	}
@@ -104,8 +119,14 @@ class INTCLI_Admin_Settings {
 	public function sanitize_fields( $input ) {
 		$sanitary_values = array();
 
-		if ( isset( $input['meetup_url'] ) ) {
-			$sanitary_values['meetup_url'] = sanitize_text_field( $input['meetup_url'] );
+		if ( isset( $input['active'] ) ) {
+			$sanitary_values['active'] = sanitize_text_field( $input['active'] );
+		}
+		if ( isset( $input['webanalytics'] ) ) {
+			$sanitary_values['webanalytics'] = sanitize_text_field( $input['webanalytics'] );
+		}
+		if ( isset( $input['chatbot'] ) ) {
+			$sanitary_values['chatbot'] = sanitize_text_field( $input['chatbot'] );
 		}
 
 		return $sanitary_values;
@@ -117,7 +138,7 @@ class INTCLI_Admin_Settings {
 	 * @return void
 	 */
 	public function intcli_section_info() {
-		echo sprintf( __( 'Put the connection API key settings in order to connect and sync products. You can go here <a href="%s" target="_blank">Meetings API</a>. ', 'integration-clientify' ), 'https://www.meetup.com/' );
+		esc_html_e( 'Put the settings for Clientify in order to integrate with WordPress', 'integration_clientify' );
 	}
 
 	/**
@@ -125,8 +146,37 @@ class INTCLI_Admin_Settings {
 	 *
 	 * @return void
 	 */
-	public function meetup_url_callback() {
-		printf( '<input class="regular-text" type="text" name="meetings[meetup_url]" id="meetup_url" value="%s">', ( isset( $this->meetup_settings['meetup_url'] ) ? esc_attr( $this->meetup_settings['meetup_url'] ) : '' ) );
+	public function webanalytics_callback() {
+		printf( '<input class="regular-text" type="text" name="integration_clientify[webanalytics]" id="webanalytics" value="%s">', ( isset( $this->intclientify_settings['webanalytics'] ) ? esc_attr( $this->intclientify_settings['webanalytics'] ) : '' ) );
+	}
+
+	/**
+	 * Chatbot URL Callback
+	 *
+	 * @return void
+	 */
+	public function chatbot_callback() {
+		printf( '<input class="regular-text" type="text" name="integration_clientify[chatbot]" id="chatbot" value="%s">', ( isset( $this->intclientify_settings['chatbot'] ) ? esc_attr( $this->intclientify_settings['chatbot'] ) : '' ) );
+	}
+
+	/**
+	 * Chatbot URL Callback
+	 *
+	 * @return void
+	 */
+	public function active_callback() {
+		?>
+		<select name="integration_clientify[active]" id="active">
+			<?php
+			$selected = ( isset( $this->intclientify_settings['active'] ) && $this->intclientify_settings['active'] === 'yes' ? 'selected' : '' );
+			?>
+			<option value="yes" <?php echo esc_html( $selected ); ?>><?php esc_html_e( 'Yes', 'integration_clientify' ); ?></option>
+			<?php
+			$selected = ( isset( $this->intclientify_settings['active'] ) && $this->intclientify_settings['active'] === 'no' ? 'selected' : '' );
+			?>
+			<option value="no" <?php echo esc_html( $selected ); ?>><?php esc_html_e( 'No', 'integration_clientify' ); ?></option>
+		</select>
+		<?php
 	}
 }
 if ( is_admin() ) {
