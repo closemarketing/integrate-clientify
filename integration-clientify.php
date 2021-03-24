@@ -3,7 +3,7 @@
  * Plugin Name: Integration with Clientify
  * Plugin URI:  https://close.marketing/plugins/integration-clientify/
  * Description: Integration for Clientify.
- * Version:     0.2
+ * Version:     0.3
  * Author:      Closemarketing
  * Author URI:  https://close.marketing
  * Text Domain: integration-clientify
@@ -23,7 +23,7 @@
 
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 
-define( 'INTCLI_VERSION', '0.2' );
+define( 'INTCLI_VERSION', '0.3' );
 
 add_action( 'plugins_loaded', 'intcli_plugin_init' );
 /**
