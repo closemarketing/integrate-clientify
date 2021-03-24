@@ -108,21 +108,6 @@ class INTCLI_Admin_Settings {
 			'intclientify-admin',
 			'intcli_setting_section'
 		);
-
-		add_settings_section(
-			'intcli_spider_section',
-			__( 'Spider Settings', 'integration-clientify' ),
-			array( $this, 'spider_section' ),
-			'intclientify-admin'
-		);
-
-		add_settings_field(
-			'spider',
-			__( 'Spider ID', 'integration-clientify' ),
-			array( $this, 'spider_callback' ),
-			'intclientify-admin',
-			'intcli_spider_section'
-		);
 	}
 
 	/**
@@ -142,18 +127,6 @@ class INTCLI_Admin_Settings {
 		}
 		if ( isset( $input['chatbot'] ) ) {
 			$sanitary_values['chatbot'] = sanitize_text_field( $input['chatbot'] );
-		}
-
-		// Save Spider options.
-		if ( isset( $input['spider'] ) ) {
-			$index = 0;
-			foreach ( $input['spider'] as $spider ) {
-				if ( $spider['page'] ) {
-					$sanitary_values['spider'][ $index ]['page'] = sanitize_text_field( $spider['page'] );
-					$sanitary_values['spider'][ $index ]['id']   = sanitize_text_field( $spider['id'] );
-					$index++;
-				}
-			}
 		}
 
 		return $sanitary_values;
@@ -203,132 +176,6 @@ class INTCLI_Admin_Settings {
 			?>
 			<option value="no" <?php echo esc_html( $selected ); ?>><?php esc_html_e( 'No', 'integration_clientify' ); ?></option>
 		</select>
-		<?php
-	}
-
-	/**
-	 * Info for holded automate section.
-	 *
-	 * @return void
-	 */
-	public function spider_section() {
-		esc_html_e( 'Put the settings for Clientify in order to integrate with WordPress', 'integration_clientify' );
-	}
-
-	private function get_pages_option() {
-		// Get Post Types Public.
-		$posts_options = array();
-
-		$post_types = get_post_types(
-			array(
-				'public'   => true,
-			),
-			'object',
-			'and'
-		);
-		foreach ( $post_types as $post_type ) {
-			if ( 'attachment' === $post_type->name ) {
-				continue;
-			}
-			// * Get posts in array
-			$posts_options[] = '--- ' . $post_type->label . ' ---';
-
-			$args_query          = array(
-				'post_type'      => $post_type->name,
-				'posts_per_page' => -1,
-				'orderby'        => 'title', // menu_order, rand, date.
-				'order'          => 'ASC',
-			);
-			$posts_array = get_posts( $args_query );
-			foreach ( $posts_array as $post_single ) {
-				$posts_options[ 'post_type' . '|' . $post_type->name . '|' . $post_single->ID ] = $post_single->post_title;
-			}
-		}
-
-		// Get Taxonomies Public.
-		$taxonomies = get_taxonomies(
-			array(
-				'public'   => true,
-			),
-			'object',
-			'and'
-		);
-		foreach ( $taxonomies as $taxonomy ) {
-			// * Get posts in array
-			$posts_options[] = '--- ' . $taxonomy->label . ' ---';
-
-			$args_query          = array(
-				'taxonomy'   => $taxonomy->name,
-				'hide_empty' => false,
-				'orderby'    => 'title', // menu_order, rand, date.
-				'order'      => 'ASC',
-			);
-			$terms_array = get_terms( $args_query );
-			foreach ( $terms_array as $term ) {
-				$posts_options[ 'taxonomy' . '|' . $taxonomy->name . '|' . $term->term_id ] = $term->name;
-			}
-		}
-		return $posts_options;
-	}
-
-	/**
-	 * Spider URL Callback
-	 *
-	 * @return void
-	 */
-	public function spider_callback() {
-		$options = get_option( 'integration_clientify' );
-		$posts_options = $this->get_pages_option();
-		for ( $idx = 0, $size = count( $options['spider'] ); $idx <= $size; ++$idx ) {
-			?>
-			<div class="repeating" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-				<p><strong><?php esc_html_e( 'Page to load' );?></strong></p>
-				<select name='integration_clientify[spider][<?php echo $idx; ?>][page]'>
-					<option value=''></option>
-					<?php 
-					// Load Page Options.
-					foreach ( $posts_options as $key => $value ) {
-						echo '<option value="' . esc_html( $key ) . '" ';
-						selected( $key, $options['spider'][ $idx ]['page']);
-						echo '>' . esc_html( $value ) . '</option>';
-					}
-					?>
-				</select>
-				<p><strong><?php esc_html_e( 'ID Spider' ); ?></strong></p>
-				<input type="text" size="30" name="integration_clientify[spider][<?php echo $idx; ?>][id]" value="<?php echo $options['spider'][ $idx ]['id']; ?>" />
-				<p><a href="#" class="repeat">Add Another</a></p>
-			</div>
-			<?php
-		}
-		?>
-		<script type="text/javascript">
-		// Prepare new attributes for the repeating section
-		var attrs = ['for', 'id', 'name'];
-		function resetAttributeNames(section) { 
-		var tags = section.find('select, input, label'), idx = section.index();
-		tags.each(function() {
-			var $this = jQuery(this);
-			jQuery.each(attrs, function(i, attr) {
-			var attr_val = $this.attr(attr);
-			if (attr_val) {
-				$this.attr(attr, attr_val.replace(/\[spider\]\[\d+\]\[/, '\[spider\]\['+(idx + 1)+'\]\['))
-			}
-			})
-		})
-		}
-
-		// Clone the previous section, and remove all of the values                  
-		jQuery('.repeat').click(function(e){
-			e.preventDefault();
-			var lastRepeatingGroup = jQuery('.repeating').last();
-			var cloned = lastRepeatingGroup.clone(true)  
-			cloned.insertAfter(lastRepeatingGroup);
-			cloned.find("input").val("");
-			cloned.find("select").val("");
-			resetAttributeNames(cloned)
-		});
-		
-		</script>
 		<?php
 	}
 }
