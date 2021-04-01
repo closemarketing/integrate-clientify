@@ -4,8 +4,8 @@ Tags: custom-admin
 Donate link: https://www.close.marketing/go/donate/
 Requires at least: 4.0
 Tested up to: 5.7
-Stable tag: 0.3
-Version: 0.3
+Stable tag: 0.4
+Version: 0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
