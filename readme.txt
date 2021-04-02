@@ -1,7 +1,7 @@
-=== Integration with Clientify ===
+=== Integrate with Clientify ===
 Contributors: closemarketing, davidperez, sacrajaimez
 Tags: custom-admin
-Donate link: https://www.close.marketing/go/donate/
+Donate link: https://close.marketing/go/donate/
 Requires at least: 4.0
 Tested up to: 5.7
 Stable tag: 0.4
@@ -16,15 +16,7 @@ Integrates Clienfity with WordPress:
 - Web Analytics
 - Chatbot
 
-Others Plugins:
-
-- [Gravity Forms CRM Addon](https://codecanyon.net/item/gravity-forms-crm-addon/10521695)
-- [WordPress Spanish Translations for Premium Plugins](https://codecanyon.net/item/wordpress-translations-for-premium-plugins/21315424)
-- [WooCommerce Wash Care Icons](https://codecanyon.net/item/wc-wash-care-for-products/22357120)
-- [Gravity Forms in Spanish](https://wordpress.org/plugins/gravityforms-es/)
-- [Gravity Forms Mailerlite](https://wordpress.org/plugins/connector-gravityforms-mailerlite/)
-
-Made by [Closemarketing](https://www.closemarketing.net/)
+Discover Other plugins in our [Profile Page](https://profiles.wordpress.org/closemarketing/#content-plugins)
 
 == Installation ==
 
@@ -33,7 +25,7 @@ WordPress installation and then activate the Plugin from Plugins page.
 
 
 == Developers ==
-[Official Repository Github](https://github.com/closemarketing/integration-clientify)
+[Official Repository Github](https://github.com/closemarketing/integrate-clientify)
 
 == Changelog ==
 
