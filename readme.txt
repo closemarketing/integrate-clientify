@@ -40,9 +40,6 @@ WordPress installation and then activate the Plugin from Plugins page.
 = 0.4 =
 *   Solved problems to publish to WordPress.org.
 
-= 0.2 =
-*   Integrate Spider Webforms.
-
 = 0.1 =
 *   First released.
 
