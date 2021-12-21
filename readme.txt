@@ -3,9 +3,9 @@ Contributors: closemarketing, davidperez, sacrajaimez
 Tags: custom-admin
 Donate link: https://close.marketing/go/donate/
 Requires at least: 4.0
-Tested up to: 5.7
-Stable tag: 0.4
-Version: 0.4
+Tested up to: 5.9
+Stable tag: 0.4.1
+Version: 0.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,9 @@ WordPress installation and then activate the Plugin from Plugins page.
 
 == Changelog ==
 
+= 0.4.1 =
+*   Fix settings not showing web.
+
 = 0.4 =
 *   Solved problems to publish to WordPress.org.
 
@@ -37,4 +40,4 @@ WordPress installation and then activate the Plugin from Plugins page.
 
 == Links ==
 
-*   [Closemarketing](https://www.close.marketing/)
+*   [Closemarketing](https://close.marketing/)

@@ -3,7 +3,7 @@
  * Plugin Name: Integrate with Clientify
  * Plugin URI:  https://close.marketing/plugins/integrate-clientify/
  * Description: Integration for Clientify.
- * Version:     0.4
+ * Version:     0.4.1
  * Author:      Closemarketing
  * Author URI:  https://close.marketing
  * Text Domain: integrate-clientify
