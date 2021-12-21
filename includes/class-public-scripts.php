@@ -18,8 +18,8 @@ class INTCLI_Public_Scripts {
 	 * Construct of class
 	 */
 	public function __construct() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'footer_scripts_webanalytics' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'footer_scripts_chatbots' ) );
+		add_action( 'wp_footer', array( $this, 'footer_scripts_webanalytics' ) );
+		add_action( 'wp_footer', array( $this, 'footer_scripts_chatbots' ) );
 	}
 
 	/**
