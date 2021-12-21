@@ -28,7 +28,7 @@ class INTCLI_Public_Scripts {
 	 * @return void
 	 */
 	public function footer_scripts_webanalytics() {
-		$int_settings        = get_option( 'integration_clientify' );
+		$int_settings        = get_option( 'integrate_clientify' );
 		$active_webanalytics = isset( $int_settings['active'] ) ? $int_settings['active'] : 'no';
 		$webanalytics        = isset( $int_settings['webanalytics'] ) ? $int_settings['webanalytics'] : '';
 
