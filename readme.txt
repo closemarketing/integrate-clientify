@@ -4,8 +4,8 @@ Tags: custom-admin
 Donate link: https://close.marketing/go/donate/
 Requires at least: 4.0
 Tested up to: 5.9
-Stable tag: 0.4.2
-Version: 0.4.2
+Stable tag: 0.5.0
+Version: 0.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,8 @@ WordPress installation and then activate the Plugin from Plugins page.
 [Official Repository Github](https://github.com/closemarketing/integrate-clientify)
 
 == Changelog ==
+= 0.5.0 =
+*   Fix error old PHPs.
 
 = 0.4.2 =
 *   Fix place scripts.
