@@ -40,7 +40,7 @@ class INTCLI_Admin_Settings {
 			__( 'Clientify Integration', 'integrate-clientify' ),
 			'manage_options',
 			'intclientify_admin',
-			array( $this, 'create_admin_page' ),
+			array( $this, 'create_admin_page' )
 		);
 	}
 
