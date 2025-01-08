@@ -24,6 +24,9 @@
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 
 define( 'INTCLI_VERSION', '0.5.0' );
+define( 'INTCLI_PLUGIN', __FILE__ );
+define( 'INTCLI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'INTCLI_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 add_action( 'plugins_loaded', 'intcli_plugin_init' );
 /**

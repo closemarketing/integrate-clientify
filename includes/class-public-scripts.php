@@ -33,6 +33,8 @@ class INTCLI_Public_Scripts {
 		$webanalytics        = isset( $int_settings['webanalytics'] ) ? $int_settings['webanalytics'] : '';
 
 		if ( $webanalytics && 'yes' === $active_webanalytics ) {
+
+			$tracker_js = INTCLI_PLUGIN_URL . 'assets/js/tracker.js';
 			// Web Analytics.
 			$script = 'if (typeof trackerCode ==="undefined"){
 			(function (d, w, u, o) {
@@ -43,7 +45,7 @@ class INTCLI_Public_Scripts {
 					m = d.getElementsByTagName("script")[0];
 				a.async = 1; a.src = u;
 				m.parentNode.insertBefore(a, m)
-			})(document, window, "https://analytics.clientify.net/tracker.js", "ana");
+			})(document, window, "' . esc_url( $tracker_js ) . '", "ana");
 			ana("setTrackerUrl", "https://analytics.clientify.net");
 			ana("setTrackingCode", "' . esc_html( $webanalytics ) . '");
 			ana("trackPageview");
