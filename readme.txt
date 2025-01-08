@@ -28,6 +28,9 @@ WordPress installation and then activate the Plugin from Plugins page.
 [Official Repository Github](https://github.com/closemarketing/integrate-clientify)
 
 == Changelog ==
+= 0.6.0 =
+*   Add local loading of tracker.js file Analytics Clientify.
+
 = 0.5.0 =
 *   Fix error old PHPs.
 
